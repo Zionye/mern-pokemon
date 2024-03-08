@@ -1,4 +1,5 @@
 import React from 'react'
+import Wrapper from '../sections/Wrapper'
 
 const About = () => {
   return (
@@ -6,4 +7,4 @@ const About = () => {
   )
 }
 
-export default About
+export default Wrapper(About); 

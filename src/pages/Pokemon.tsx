@@ -1,4 +1,5 @@
 import React from 'react'
+import Wrapper from '../sections/Wrapper'
 
 const Pokemon = () => {
   return (
@@ -6,4 +7,4 @@ const Pokemon = () => {
   )
 }
 
-export default Pokemon
+export default Wrapper(Pokemon);

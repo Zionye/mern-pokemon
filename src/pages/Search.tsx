@@ -1,4 +1,5 @@
 import React from 'react'
+import Wrapper from '../sections/Wrapper'
 
 const Search = () => {
   return (
@@ -6,4 +7,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default Wrapper(Search);
