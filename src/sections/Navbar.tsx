@@ -1,10 +1,13 @@
+import { useEffect } from 'react';
 import pokeballIcon from '../assets/pokeball-icon.png'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
-  //Navbar Routes
-  const navigationRoutes = [
+  const location = useLocation();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const navigationRoutes = [  //Navbar Routes
     {
       name: "Search",
       route: "/search",
@@ -27,21 +30,37 @@ const Navbar = () => {
     },
   ];
 
+  useEffect(() => {
+    const index = navigationRoutes.findIndex( ({route}) => location.pathname.includes(route));
+    ul(index);
+  },[navigationRoutes, location.pathname]);
+  const ul = (idx: number) => {
+    const underlines = document.querySelectorAll<HTMLElement>(".underline");
+    for(let i = 0; i < underlines.length; i++){
+      underlines[i].style.transform = `translate3d(${idx * 100}%, 0, 0)`;
+    }
+  }
+
   return (
     <nav>
       <div className='block'>
         <img src={pokeballIcon} alt="pokeball icon" />
       </div>
       <div className='data'>
-        {
-          navigationRoutes.map( ({name, route}, index) => {
-            return(
-              <Link to={route} key={index}>
-                <li>{name}</li>
-              </Link>
-            )
-          })
-        }
+        <ul>
+          <div className="underline"></div>
+          <div className="underline"></div>
+          <div className="underline"></div>
+          {
+            navigationRoutes.map( ({name, route}, index) => {
+              return(
+                <Link to={route} key={index}>
+                  <li>{name}</li>
+                </Link>
+              )
+            })
+          }
+        </ul>
       </div>
       <div className='block'>
         <GiHamburgerMenu />
