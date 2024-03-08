@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AppTypeInitialState } from "../../utils/Types";
+import { AppTypeInitialState } from "../../utils/types";
 
 // 创建初始状态
 const initialState: AppTypeInitialState = {};
