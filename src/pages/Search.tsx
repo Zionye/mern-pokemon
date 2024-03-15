@@ -22,10 +22,29 @@ const Search = () => {
     }
   }, [allPokemon, dispatch]);
 
+  const getPokemon = async (value: string) => {
+    if(value.length){
+      const pokemons = allPokemon?.filter((pokemon) =>
+        pokemon.name.includes(value.toLowerCase())
+      );
+      dispatch(getPokemonsData(pokemons!));
+    } else {
+      // get random 20 Pokemon
+      const copyPokemons = [...(allPokemon as [])];
+      const randomPokemonsId = copyPokemons.sort(() => Math.random()-Math.random()).slice(0, 20);
+      dispatch(getPokemonsData(randomPokemonsId));
+    }
+  };
+
   return (
     <>
       <div className="search">
-        <input type="text" className="pokemon-searchbar"  placeholder="Search Pokemon"/>
+        <input 
+          onChange={(e) => getPokemon(e.target.value)}
+          type="text" 
+          className="pokemon-searchbar" 
+          placeholder="Search Pokemon"
+        />
         <PokemonCardGrid pokemons={randomPokemons!} />
       </div>
     </>
