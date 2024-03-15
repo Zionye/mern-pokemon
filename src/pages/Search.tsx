@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { getInitialPokemonData } from '../app/reducers/getInitialPokemonData';
 import { getPokemonsData } from '../app/reducers/getPokemonsData';
 import PokemonCardGrid from '../components/PokemonCardGrid';
+import { debounce } from '../utils/debounce';
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ const Search = () => {
     }
   }, [allPokemon, dispatch]);
 
+  const handleChange = debounce((value: string) => getPokemon(value), 300);
   const getPokemon = async (value: string) => {
     if(value.length){
       const pokemons = allPokemon?.filter((pokemon) =>
@@ -40,7 +42,7 @@ const Search = () => {
     <>
       <div className="search">
         <input 
-          onChange={(e) => getPokemon(e.target.value)}
+          onChange={(e) => handleChange(e.target.value)}
           type="text" 
           className="pokemon-searchbar" 
           placeholder="Search Pokemon"
