@@ -4,6 +4,7 @@ import { AppTypeInitialState } from "../../utils/types";
 // 创建初始状态
 const initialState: AppTypeInitialState = {
   toasts: [],
+  userInfo: undefined,
 };
 
 // 创建切片
@@ -19,10 +20,14 @@ export const AppSlice = createSlice({
     clearToasts: (state) => {
       state.toasts = [];
     },
+    setUserStatus: (state, actions)=>{
+      state.userInfo = actions.payload;
+    },
   }
 });
 
 export const { 
   setToast, 
   clearToasts,
+  setUserStatus,
 } = AppSlice.actions;
