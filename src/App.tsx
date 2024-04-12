@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Navbar from './sections/Navbar'
-import Wrapper from './sections/Wrapper'
 import Footer from './sections/Footer'
 import Background from './components/Background'
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
@@ -13,12 +12,21 @@ import MyList from './pages/MyList'
 import Compare from './pages/Compare'
 import About from './pages/About'
 import { useAppSelector, useAppDispatch } from './app/hooks';
-import { clearToasts } from './app/slices/AppSlice'
+import { clearToasts, setUserStatus } from './app/slices/AppSlice'
+import { onAuthStateChanged } from 'firebase/auth'
+import { firebaseAuth } from './utils/firebaseConfig'
 
 
 const App = () => {
   const {toasts} = useAppSelector(({app})=> app);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // grab the firebase authentication after a refresh if the user is already logged in
+    onAuthStateChanged(firebaseAuth, (currentUser)=>{
+      dispatch(setUserStatus({ email: currentUser?.email }))
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     const toastOptions: ToastOptions = {
@@ -51,7 +59,6 @@ const App = () => {
             <Route element={<Pokemon />} path='/pokemon/:id'></Route>
             <Route element={<Navigate to='/pokemon/1' />} path="*"></Route>
           </Routes>
-          {/* <Wrapper /> */}
           <Footer />
           <ToastContainer />
         </div>
