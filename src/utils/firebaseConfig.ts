@@ -18,4 +18,4 @@ export const firebaseAuth = getAuth(app);
 export const firebaseDB = getFirestore(app);
 
 export const usersRef = collection(firebaseDB, 'users');
-export const pokemonRef = collection(firebaseDB, 'pokemonList');
+export const pokemonListRef = collection(firebaseDB, 'pokemonList');
