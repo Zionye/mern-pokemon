@@ -24,7 +24,9 @@ const App = () => {
   useEffect(() => {
     // grab the firebase authentication after a refresh if the user is already logged in
     onAuthStateChanged(firebaseAuth, (currentUser)=>{
-      dispatch(setUserStatus({ email: currentUser?.email }))
+      if(currentUser){
+        dispatch(setUserStatus({ email: currentUser.email as string }));
+      }
     });
   }, [dispatch]);
 
