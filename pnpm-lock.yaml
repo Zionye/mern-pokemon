@@ -32,6 +32,9 @@ dependencies:
   axios:
     specifier: ^1.6.7
     version: 1.6.7
+  extract-colors:
+    specifier: ^4.0.2
+    version: 4.0.2
   firebase:
     specifier: ^10.8.1
     version: 10.8.1
@@ -5767,6 +5770,10 @@ packages:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /extract-colors@4.0.2:
+    resolution: {integrity: sha512-G7v2C3LJqW38U+yRUPD6nJCjBRfdLD7y8efEHn+1qONt1mhj+OZBpzFmiaS+dZiHU/k0dvgK2kgIkbAllHVbRw==}
     dev: false
 
   /fast-deep-equal@3.1.3:
